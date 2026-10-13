@@ -75,12 +75,45 @@
   .faq-item .q{font-weight:700;font-size:0.98rem;margin-bottom:6px;}
   .faq-item .a{color:var(--muted);font-size:0.92rem;}
 
+  /* FOUNDER / TEAM PROFILES */
+  .person{max-width:640px;margin:0 auto;text-align:center;}
+  .person + .person{margin-top:44px;padding-top:44px;border-top:3px dashed var(--border);}
+  .person h3.person-name{font-size:1.6rem;margin:0 0 12px;}
+  .person p{color:var(--muted);font-size:1rem;font-weight:500;line-height:1.7;margin:0;}
+
   /* GET INVOLVED */
   .involve-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
   @media (max-width:760px){.involve-grid{grid-template-columns:1fr;}}
   .involve-card{background:var(--panel);border:3px solid var(--border);border-radius:20px;padding:28px;}
   .involve-card h3{font-size:1.15rem;margin:0 0 10px;}
   .involve-card p{color:var(--muted);font-size:0.93rem;margin:0 0 16px;}
+
+
+  /* COMPETITIONS POPUP */
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-start;justify-content:center;background:rgba(36,32,56,0.6);padding:30px 16px;overflow-y:auto;}
+  .modal.open{display:flex;}
+  .modal-box{background:var(--bg);border-radius:28px;max-width:860px;width:100%;position:relative;padding:44px 36px 36px;border:4px solid var(--violet);}
+  .modal-close{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:3px solid var(--ink);background:#fff;font-size:1.3rem;font-weight:700;cursor:pointer;line-height:1;font-family:'Baloo 2',sans-serif;}
+  .modal-close:hover{background:var(--violet);color:#fff;border-color:var(--violet);}
+  .modal-box .m-title{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.2;margin:0 0 12px;text-align:center;}
+  .modal-box .m-lede{color:var(--muted);text-align:center;max-width:60ch;margin:0 auto 20px;font-weight:500;}
+  .m-steps{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px;}
+  .m-step{background:#fff;border:3px solid var(--border);border-radius:30px;padding:6px 16px;font-family:'JetBrains Mono',monospace;font-size:0.78rem;font-weight:700;}
+  .m-step .arrow{color:var(--violet);}
+  .comp-card{background:#fff;border:3px solid var(--border);border-radius:20px;padding:24px;margin-bottom:18px;}
+  .comp-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:10px;}
+  .comp-chip{width:40px;height:40px;border-radius:12px;flex-shrink:0;}
+  .comp-head h3{font-size:1.3rem;margin:0 0 4px;}
+  .comp-head p{color:var(--muted);font-size:0.93rem;margin:0;}
+  .comp-body{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;margin-top:14px;}
+  @media (max-width:700px){.comp-body{grid-template-columns:1fr;} .modal-box{padding:44px 20px 28px;}}
+  .comp-body h4{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;}
+  .comp-body ul{margin:0;padding-left:18px;font-size:0.92rem;}
+  .comp-body li{margin-bottom:6px;}
+  .comp-res{background:#F3EEFF;border-radius:14px;padding:16px 18px;height:fit-content;}
+  .comp-res a{display:block;font-size:0.88rem;color:var(--violet);text-decoration:none;margin-bottom:8px;font-weight:600;}
+  .comp-res a:last-child{margin-bottom:0;}
+  .comp-res a:hover{text-decoration:underline;}
 
   footer{padding:40px 0 56px;text-align:center;}
   footer .links{display:flex;gap:22px;justify-content:center;margin-bottom:14px;}
@@ -97,8 +130,8 @@
     <a href="index.html" style="text-decoration:none;color:inherit;"><div class="brand"><span class="swatch">🌈</span>Wavelength STEM</div></a>
     <div class="navlinks">
       <a href="#programs">Programs</a>
-      <a href="#founder">Founder</a>
-      <a href="competitions.html">Competitions</a>
+      <a href="#founder">Team</a>
+      <a href="#competitions" class="open-comp">Competitions</a>
       <a href="#parents">For Parents</a>
       <a href="#involve">Get Involved</a>
     </div>
@@ -117,7 +150,7 @@
 
     <div class="play-zone">
       <div class="label">🎨 Try it! Slide to change the color of light</div>
-      <div class="rainbow-box" id="rainbowBox">Wheee!</div>
+      <div class="rainbow-box" id="rainbowBox"></div>
       <input type="range" id="colorSlider" min="0" max="100" value="20">
       <div class="play-caption">This is what scientists call "wavelength" — it's why our club is named that!</div>
     </div>
@@ -153,12 +186,22 @@
   <div class="wrap">
     <div class="parent-section" style="background:#FFF4E8;">
       <div class="section-head">
-        <div class="eyebrow">👋 Meet the Founder</div>
-        <h2>Arjun Nair, Redmond High School</h2>
+        <div class="eyebrow">👋 Meet the Team</div>
       </div>
-      <div style="max-width:640px;margin:0 auto;text-align:center;">
-        <p style="color:var(--muted);font-size:1rem;font-weight:500;line-height:1.7;">
+
+      <!-- Arjun -->
+      <div class="person">
+        <h3 class="person-name">Arjun Nair, Redmond High School</h3>
+        <p>
           Arjun, a Presidential Service Award winner, founded Wavelength STEM after two years of teaching hands-on science and math at Horace Mann Elementary. His work in youth STEM education and community service — including organizing annual book drives across multiple LWSD schools that brought roughly 5,000 books to underpriviledged children — was recognized by the Lake Washington School District. He is a board member in the Redmond High School Physics club, has conducted independent and mentored research in waves and frequencies following his passion in this field. Wavelength STEM is the next chapter of that same commitment: bringing real, hands-on science to more elementary students across Redmond and ignite their curiosity at a very young age.
+        </p>
+      </div>
+
+      <!-- Aadya -->
+      <div class="person">
+        <h3 class="person-name">Aadya Sharma</h3>
+        <p>
+          Aadya Sharma is an innovation-minded high school student passionate about STEM, leadership, and community service. With nearly four years of experience volunteering across multiple school communities, she has participated in a variety of competitive STEM events and currently teaches classes to support students at Redmond Middle School as they prepare for Science Olympiad competitions. Through her work at Wavelength STEM, Aadya hopes to create a positive and engaging learning experience for elementary-aged students while inspiring a lifelong love for science. In her free time, she enjoys reading and exploring new places!
         </p>
       </div>
     </div>
@@ -225,10 +268,103 @@
   <div class="links">
     <a href="mailto:wavelengthstem.redmond@gmail.com">Email</a>
     <a href="https://github.com/" target="_blank" rel="noopener">Our Lessons - under construction (free to use!)</a>
-    <a href="competitions.html">Competitions</a>
+    <a href="#competitions" class="open-comp">Competitions</a>
   </div>
   <div class="sig mono">λ = v / f — the wave equation that started it all</div>
 </footer>
+
+<div class="modal" id="compModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-labelledby="compTitle">
+    <button class="modal-close" id="compClose" aria-label="Close">✕</button>
+    <h2 class="m-title" id="compTitle">🏆 We mentor students toward real physics and science competitions.</h2>
+    <p class="m-lede">Unlike a knowledge-test format, science competitions at the elementary level are mostly project- and team-based. Here's the real pathway we prepare students for — starting local, with a track record already established at Horace Mann.</p>
+    <div class="m-steps">
+      <div class="m-step">Mann Elementary PTSA Fair</div>
+      <div class="m-step"><span class="arrow">→</span> CSRSEF (Regional)</div>
+      <div class="m-step"><span class="arrow">→</span> WSSEF (State)</div>
+      <div class="m-step"><span class="arrow">→</span> ISEF (International)</div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-head">
+        <div class="comp-chip" style="background:var(--violet);"></div>
+        <div>
+          <h3>Washington State Science and Engineering Fair (WSSEF)</h3>
+          <p>WSSEF is open to students in grades 1–12 — not just high schoolers. Students design and carry out an original research project, then present it to judges. Our region qualifies through the Central Sound Regional Science and Engineering Fair (CSRSEF), serving King and Snohomish counties.</p>
+        </div>
+      </div>
+      <div class="comp-body">
+        <div>
+          <h4>Highlights</h4>
+          <ul>
+            <li>Real, individual research projects — students pick a genuine testable question, not a worksheet.</li>
+            <li>A documented Horace Mann precedent: a first-grade student has won first prize and special awards at WSSEF.</li>
+            <li>Clear advancement pathway: school fair → CSRSEF → WSSEF → (for top projects) ISEF.</li>
+            <li>We mentor project selection, experimental design, and presentation — not just the science content.</li>
+          </ul>
+        </div>
+        <div class="comp-res">
+          <h4>Resources</h4>
+          <a href="https://wssef.org/" target="_blank" rel="noopener">WSSEF official site</a>
+          <a href="https://wssef.stemwizard.com/" target="_blank" rel="noopener">WSSEF student registration</a>
+          <a href="https://www.centralsoundfair.org/resources/for-students" target="_blank" rel="noopener">Central Sound Regional Fair (CSRSEF) — for students</a>
+          <span style="display:block;font-size:0.88rem;color:var(--muted);">Horace Mann Elementary Science Fair</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-head">
+        <div class="comp-chip" style="background:var(--green);"></div>
+        <div>
+          <h3>Science Olympiad — Division A</h3>
+          <p>Science Olympiad's Division A is built specifically for elementary school (grades K–6), distinct from the middle and high school divisions. Teams compete across events spanning physics, earth science, and life science.</p>
+        </div>
+      </div>
+      <div class="comp-body">
+        <div>
+          <h4>Highlights</h4>
+          <ul>
+            <li>Team-based format — students work together across a shared slate of events.</li>
+            <li>We focus on the knowledge and lab-based events, matching our strength in hands-on scientific reasoning.</li>
+            <li>Division A "emphasizes meeting event standards rather than competition" — a lower-pressure entry point than the fair pathway.</li>
+            <li>A natural on-ramp to Division B in middle school for students who want to keep going.</li>
+          </ul>
+        </div>
+        <div class="comp-res">
+          <h4>Resources</h4>
+          <a href="https://washingtonscienceolympiad.com/" target="_blank" rel="noopener">Washington Science Olympiad</a>
+          <a href="https://washingtonscienceolympiad.com/tournaments" target="_blank" rel="noopener">Tournament schedule</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card" style="margin-bottom:0;">
+      <div class="comp-head">
+        <div class="comp-chip" style="background:var(--orange);"></div>
+        <div>
+          <h3>ExploraVision</h3>
+          <p>A K–12 science innovation competition where student teams envision and describe a future technology that solves a real problem. A written and illustrated format — no building or construction required.</p>
+        </div>
+      </div>
+      <div class="comp-body">
+        <div>
+          <h4>Highlights</h4>
+          <ul>
+            <li>Rewards conceptual and scientific thinking over engineering/construction skills.</li>
+            <li>Team-based, open to elementary-aged students.</li>
+            <li>A good complement for students who enjoy the ideas behind physics more than hands-on building.</li>
+            <li>National recognition for top entries.</li>
+          </ul>
+        </div>
+        <div class="comp-res">
+          <h4>Resources</h4>
+          <a href="https://www.exploravision.org/" target="_blank" rel="noopener">ExploraVision official site</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -242,6 +378,17 @@
   }
   slider.addEventListener('input', update);
   update();
+})();
+
+(function(){
+  const modal = document.getElementById('compModal');
+  const closeBtn = document.getElementById('compClose');
+  function openModal(e){ if(e) e.preventDefault(); modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; modal.scrollTop=0; }
+  function closeModal(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  document.querySelectorAll('.open-comp').forEach(a=>a.addEventListener('click',openModal));
+  closeBtn.addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 })();
 </script>
 
